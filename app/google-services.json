@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "669881765461",
+    "project_id": "game-catalog-94eb1",
+    "storage_bucket": "game-catalog-94eb1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669881765461:android:78b10757e2d4d38ec7cedc",
+        "android_client_info": {
+          "package_name": "com.bsuir.game_catalog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6zemOLRxtkL981QNYQDfidoLRKDf1EYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

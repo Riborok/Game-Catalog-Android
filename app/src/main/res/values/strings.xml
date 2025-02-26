@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Game Catalog</string>
+    <string name="sign_in_failed">Sign in failed</string>
+    <string name="sign_up_failed">Sign up failed</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="sign_in_title">Sign In</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="sign_up_toggle">Don\'t have an account?</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_in_toggle">Already have an account?</string>
+    <string name="sign_up_button">Sign Up</string>
 </resources>
