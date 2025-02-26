@@ -2,20 +2,21 @@ package com.bsuir.game_catalog.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = AuthRepository()
 
-    private val _user = MutableLiveData(repository.currentUser)
-    val user: LiveData<FirebaseUser?> = _user
+    private val _user = MutableStateFlow(repository.currentUser)
+    val user = _user.asStateFlow()
 
-    private val _errorMessage = MutableLiveData<String?>()
-    val errorMessage: LiveData<String?> = _errorMessage
+    private val _errorMessage = MutableStateFlow<String?>(null)
+    val errorMessage = _errorMessage.asStateFlow()
 
     fun signIn(email: String, password: String) {
         repository.signIn(email, password) { onResult(it, R.string.sign_in_failed) }
@@ -31,14 +32,12 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun onResult(result: Result<FirebaseUser?>, errorStrId: Int) {
         result.onSuccess { firebaseUser ->
-            _user.postValue(firebaseUser)
-            _errorMessage.postValue(null)
+            _user.value = firebaseUser
+            _errorMessage.value = null
         }
         result.onFailure { throwable ->
             val context = getApplication<Application>().applicationContext
-            _errorMessage.postValue(
-                throwable.message ?: context.getString(errorStrId)
-            )
+            _errorMessage.value = throwable.message ?: context.getString(errorStrId)
         }
     }
 

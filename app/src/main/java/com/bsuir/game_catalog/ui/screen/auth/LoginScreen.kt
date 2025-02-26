@@ -2,8 +2,8 @@ package com.bsuir.game_catalog.ui.screen.auth
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -12,6 +12,7 @@ import com.bsuir.game_catalog.Routes
 import com.bsuir.game_catalog.ui.component.auth.AuthBox
 import com.bsuir.game_catalog.ui.component.auth.card.LoginCard
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun LoginScreen(
@@ -21,13 +22,14 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val errorMessage by authViewModel.errorMessage.observeAsState()
-    val user by authViewModel.user.observeAsState()
+    val errorMessage by authViewModel.errorMessage.collectAsState()
 
-    LaunchedEffect(user) {
-        if (user != null) {
-            navController.navigate(Routes.MAIN) {
-                popUpTo(Routes.AUTH) { inclusive = true }
+    LaunchedEffect(Unit) {
+        authViewModel.user.collectLatest { user ->
+            if (user != null) {
+                navController.navigate(Routes.MAIN) {
+                    popUpTo(Routes.AUTH) { inclusive = true }
+                }
             }
         }
     }
