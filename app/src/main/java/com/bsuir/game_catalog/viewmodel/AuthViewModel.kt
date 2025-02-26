@@ -18,32 +18,27 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     val errorMessage: LiveData<String?> = _errorMessage
 
     fun signIn(email: String, password: String) {
-        repository.signIn(email, password) { result ->
-            result.onSuccess { firebaseUser ->
-                _user.postValue(firebaseUser)
-                _errorMessage.postValue(null)
-            }
-            result.onFailure { throwable ->
-                val context = getApplication<Application>().applicationContext
-                _errorMessage.postValue(
-                    throwable.message ?: context.getString(R.string.sign_in_failed)
-                )
-            }
-        }
+        repository.signIn(email, password) { onResult(it, R.string.sign_in_failed) }
     }
 
     fun signUp(email: String, password: String) {
-        repository.signUp(email, password) { result ->
-            result.onSuccess { firebaseUser ->
-                _user.postValue(firebaseUser)
-                _errorMessage.postValue(null)
-            }
-            result.onFailure { throwable ->
-                val context = getApplication<Application>().applicationContext
-                _errorMessage.postValue(
-                    throwable.message ?: context.getString(R.string.sign_up_failed)
-                )
-            }
+        repository.signUp(email, password) { onResult(it, R.string.sign_up_failed) }
+    }
+
+    fun deleteAccount() {
+        repository.deleteAccount { onResult(it, R.string.user_deletion_failed) }
+    }
+
+    private fun onResult(result: Result<FirebaseUser?>, errorStrId: Int) {
+        result.onSuccess { firebaseUser ->
+            _user.postValue(firebaseUser)
+            _errorMessage.postValue(null)
+        }
+        result.onFailure { throwable ->
+            val context = getApplication<Application>().applicationContext
+            _errorMessage.postValue(
+                throwable.message ?: context.getString(errorStrId)
+            )
         }
     }
 
