@@ -61,7 +61,7 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
 
     implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.navigation.compose.v277)
 }
