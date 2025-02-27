@@ -16,7 +16,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.ui.component.auth.form.AuthButton
-import com.bsuir.game_catalog.ui.component.auth.form.AuthErrorText
 import com.bsuir.game_catalog.ui.component.auth.form.AuthTextField
 import com.bsuir.game_catalog.ui.component.auth.form.AuthTitle
 import com.bsuir.game_catalog.ui.component.auth.form.AuthToggleText
@@ -28,7 +27,6 @@ fun AuthCard(
     onEmailChange: (String) -> Unit,
     password: String,
     onPasswordChange: (String) -> Unit,
-    errorMessage: String?,
     buttonText: String,
     onButtonClick: () -> Unit,
     toggleText: String,
@@ -67,9 +65,5 @@ fun AuthCard(
         Spacer(modifier = Modifier.height(4.dp))
 
         AuthToggleText(toggleText, toggleButtonText, onToggleClick)
-
-        errorMessage?.let {
-            AuthErrorText(it)
-        }
     }
 }

@@ -1,7 +1,6 @@
 package com.bsuir.game_catalog.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
@@ -10,14 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(application: Application) : AndroidViewModel(application) {
+class ProfileViewModel(application: Application) : ErrorHandlingViewModel(application) {
     private val repository = ProfileRepository()
 
     private val _userProfile = MutableStateFlow(UserProfile())
     val userProfile = _userProfile.asStateFlow()
-
-    private val _errorMessage = MutableStateFlow<String?>(null)
-    val errorMessage = _errorMessage.asStateFlow()
 
     init {
         observeUserAuthState()
@@ -48,7 +44,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
             if (data is UserProfile) {
                 _userProfile.value = data
             }
-            _errorMessage.value = null
         }
         result.onFailure { throwable ->
             val context = getApplication<Application>().applicationContext

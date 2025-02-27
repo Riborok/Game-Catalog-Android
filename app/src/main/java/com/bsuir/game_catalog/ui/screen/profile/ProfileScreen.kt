@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.ui.Background
+import com.bsuir.game_catalog.ui.component.error.ErrorNotification
 import com.bsuir.game_catalog.ui.component.profile.card.DataCard
 import com.bsuir.game_catalog.ui.component.profile.card.ProfileCard
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
@@ -58,6 +59,8 @@ fun ProfileScreen(
                 userProfile = userProfile,
                 onUserProfileChange = onUserProfileChange
             )
+            ErrorNotification(authViewModel)
+            ErrorNotification(profileViewModel)
         }
     }
 }

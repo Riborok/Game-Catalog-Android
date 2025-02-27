@@ -22,6 +22,8 @@
     <string name="avatar_url_dialog_title">Enter Image URL</string>
     <string name="avatar_url_dialog_url_label">URL</string>
 
+    <string name="error">Error</string>
+
     <string name="ok_button">ОK</string>
     <string name="cancel_button">Cancel</string>
 
