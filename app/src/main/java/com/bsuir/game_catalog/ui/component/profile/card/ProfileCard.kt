@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
+import com.bsuir.game_catalog.ui.component.general.ElevatedCard
 import com.bsuir.game_catalog.ui.component.profile.avatar.EditableAvatar
 
 @Composable
@@ -24,11 +25,7 @@ fun ProfileCard(
     userProfile: UserProfile,
     onUserProfileChange: (UserProfile) -> Unit
 ) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-    ) {
+    ElevatedCard {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

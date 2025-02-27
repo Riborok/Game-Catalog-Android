@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.model.UserProfile
+import com.bsuir.game_catalog.ui.component.general.ElevatedCard
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileActions
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileFields
 
@@ -23,11 +24,7 @@ fun DataCard(
     onSignOut: () -> Unit,
     onDeleteAccount: () -> Unit,
 ) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-    ) {
+    ElevatedCard {
         Column(modifier = Modifier.padding(16.dp)) {
             ProfileFields(
                 userProfile = userProfile,

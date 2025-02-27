@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
-import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.error.ErrorNotification
+import com.bsuir.game_catalog.ui.component.profile.ProfileBackground
 import com.bsuir.game_catalog.ui.component.profile.card.DataCard
 import com.bsuir.game_catalog.ui.component.profile.card.ProfileCard
 import com.bsuir.game_catalog.ui.component.status.StatusNotification
@@ -43,27 +43,20 @@ fun ProfileScreen(
         }
     }
 
-    Background {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp)
-        ) {
-            ProfileCard(
-                userProfile = userProfile,
-                onUserProfileChange = onUserProfileChange
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            DataCard(
-                userProfile = userProfile,
-                onUserProfileChange = onUserProfileChange,
-                onSaveProfile = { profileViewModel.saveUserProfile(userProfile) },
-                onSignOut = { authViewModel.signOut() },
-                onDeleteAccount = { authViewModel.deleteAccount() }
-            )
-            ErrorNotification(authViewModel)
-            StatusNotification(R.string.profile_updated_successfully, profileViewModel)
-        }
+    ProfileBackground {
+        ProfileCard(
+            userProfile = userProfile,
+            onUserProfileChange = onUserProfileChange
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        DataCard(
+            userProfile = userProfile,
+            onUserProfileChange = onUserProfileChange,
+            onSaveProfile = { profileViewModel.saveUserProfile(userProfile) },
+            onSignOut = { authViewModel.signOut() },
+            onDeleteAccount = { authViewModel.deleteAccount() }
+        )
+        ErrorNotification(authViewModel)
+        StatusNotification(R.string.profile_updated_successfully, profileViewModel)
     }
 }
