@@ -14,15 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
-import com.bsuir.game_catalog.model.UserProfile
-import com.bsuir.game_catalog.viewmodel.AuthViewModel
-import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
 @Composable
 fun ProfileActions(
-    authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel,
-    userProfile: UserProfile,
+    onSaveProfile: () -> Unit,
+    onSignOut: () -> Unit,
+    onDeleteAccount: () -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -30,19 +27,19 @@ fun ProfileActions(
     ) {
         Button(
             modifier = Modifier.fillMaxWidth(0.65f),
-            onClick = {
-                profileViewModel.saveUserProfile(userProfile)
-            }) {
+            onClick = onSaveProfile
+        ) {
             Text(stringResource(R.string.save))
         }
         Button(modifier = Modifier.fillMaxWidth(0.9f),
-            onClick = { authViewModel.signOut() }) {
+            onClick = onSignOut
+        ) {
             Text(stringResource(R.string.sign_out))
         }
     }
     Spacer(modifier = Modifier.height(16.dp))
     Button(
-        onClick = { authViewModel.deleteAccount() },
+        onClick = onDeleteAccount,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error),
         modifier = Modifier.fillMaxWidth()

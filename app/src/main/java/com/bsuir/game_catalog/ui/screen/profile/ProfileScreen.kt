@@ -54,10 +54,11 @@ fun ProfileScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
             DataCard(
-                authViewModel = authViewModel,
-                profileViewModel = profileViewModel,
                 userProfile = userProfile,
-                onUserProfileChange = onUserProfileChange
+                onUserProfileChange = onUserProfileChange,
+                onSaveProfile = { profileViewModel.saveUserProfile(userProfile) },
+                onSignOut = { authViewModel.signOut() },
+                onDeleteAccount = { authViewModel.deleteAccount() }
             )
             ErrorNotification(authViewModel)
             ErrorNotification(profileViewModel)

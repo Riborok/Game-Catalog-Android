@@ -38,6 +38,5 @@ class AuthViewModel(application: Application) : ErrorHandlingViewModel(applicati
     fun signOut() {
         repository.signOut()
         _user.value = null
-        _errorMessage.value = null
     }
 }

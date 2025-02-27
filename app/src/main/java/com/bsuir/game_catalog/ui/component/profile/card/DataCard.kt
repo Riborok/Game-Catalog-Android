@@ -14,15 +14,14 @@ import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileActions
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileFields
-import com.bsuir.game_catalog.viewmodel.AuthViewModel
-import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
 @Composable
 fun DataCard(
-    authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel,
     userProfile: UserProfile,
-    onUserProfileChange: (UserProfile) -> Unit
+    onUserProfileChange: (UserProfile) -> Unit,
+    onSaveProfile: () -> Unit,
+    onSignOut: () -> Unit,
+    onDeleteAccount: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -36,9 +35,9 @@ fun DataCard(
             )
             Spacer(modifier = Modifier.height(16.dp))
             ProfileActions(
-                authViewModel = authViewModel,
-                profileViewModel = profileViewModel,
-                userProfile = userProfile
+                onSaveProfile = onSaveProfile,
+                onSignOut = onSignOut,
+                onDeleteAccount = onDeleteAccount
             )
         }
     }
