@@ -35,22 +35,22 @@ class MainActivity : ComponentActivity() {
                     navController = navController,
                     startDestination = initialDestination
                 ) {
-                    composable(Routes.AUTH) {
-                        NavigateToMainIfAuthenticated(authViewModel, navController)
+                    composable(Routes.LOGIN) {
+                        NavigateToProfileIfAuthenticated(authViewModel, navController)
                         LoginScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
                     composable(Routes.REGISTER) {
-                        NavigateToMainIfAuthenticated(authViewModel, navController)
+                        NavigateToProfileIfAuthenticated(authViewModel, navController)
                         RegisterScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
-                    composable(Routes.MAIN) {
-                        NavigateToAuthIfUnauthenticated(authViewModel, navController)
+                    composable(Routes.PROFILE) {
+                        NavigateToLoginIfUnauthenticated(authViewModel, navController)
                         ProfileScreen(
                             authViewModel = authViewModel,
                             profileViewModel = profileViewModel,
@@ -73,4 +73,4 @@ inline fun <reified T : ViewModel> getAndroidViewModel(
 }
 
 fun getInitialDest(authViewModel: AuthViewModel): String =
-    if (authViewModel.user.value != null) Routes.MAIN else Routes.AUTH
+    if (authViewModel.user.value != null) Routes.PROFILE else Routes.LOGIN

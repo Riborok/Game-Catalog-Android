@@ -1,7 +1,6 @@
 package com.bsuir.game_catalog.ui.screen.auth
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +11,6 @@ import com.bsuir.game_catalog.Routes
 import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.auth.card.RegisterCard
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun RegisterScreen(
@@ -32,7 +30,7 @@ fun RegisterScreen(
             onPasswordChange = { password = it },
             errorMessage = errorMessage,
             onSignUp = { authViewModel.signUp(email, password) },
-            onToggleCard = { navController.navigate(Routes.AUTH) }
+            onToggleCard = { navController.navigate(Routes.LOGIN) }
         )
     }
 }
