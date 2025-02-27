@@ -8,16 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.res.stringResource
-import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
-import com.bsuir.game_catalog.ui.component.profile.avatar.EditableAvatar
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileActions
 import com.bsuir.game_catalog.ui.component.profile.field.ProfileFields
 import com.bsuir.game_catalog.viewmodel.AuthViewModel

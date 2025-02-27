@@ -8,5 +8,5 @@ object Route {
     const val PROFILE = "profile"
 
     fun getInitialRoute(authViewModel: AuthViewModel): String =
-        if (authViewModel.user.value != null) Route.PROFILE else Route.LOGIN
+        if (authViewModel.user.value != null) PROFILE else LOGIN
 }

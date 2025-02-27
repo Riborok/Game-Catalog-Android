@@ -1,14 +1,12 @@
 package com.bsuir.game_catalog.viewmodel
 
 import android.app.Application
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 

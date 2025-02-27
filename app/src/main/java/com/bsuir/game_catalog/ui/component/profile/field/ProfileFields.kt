@@ -4,9 +4,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.ui.component.date.DatePickerField

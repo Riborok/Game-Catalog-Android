@@ -6,7 +6,6 @@ import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {

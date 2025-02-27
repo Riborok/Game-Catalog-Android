@@ -11,8 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
