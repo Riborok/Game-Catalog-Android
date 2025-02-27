@@ -1,13 +1,44 @@
 <resources>
     <string name="app_name">Game Catalog</string>
+
     <string name="sign_in_failed">Sign in failed</string>
     <string name="sign_up_failed">Sign up failed</string>
+    <string name="user_deletion_failed">Failed to delete account</string>
+    <string name="profile_load_failed">Failed to load profile</string>
+    <string name="profile_save_failed">Failed to save profile</string>
+
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>
+
     <string name="sign_in_title">Sign In</string>
-    <string name="sign_in_button">Sign In</string>
-    <string name="sign_up_toggle">Don\'t have an account?</string>
     <string name="sign_up_title">Sign Up</string>
-    <string name="sign_in_toggle">Already have an account?</string>
+
+    <string name="sign_in_button">Sign In</string>
     <string name="sign_up_button">Sign Up</string>
+
+    <string name="sign_up_toggle">Don\'t have an account?</string>
+    <string name="sign_in_toggle">Already have an account?</string>
+
+    <string name="avatar_url_dialog_title">Enter Image URL</string>
+    <string name="avatar_url_dialog_url_label">URL</string>
+
+    <string name="ok_button">ОK</string>
+    <string name="cancel_button">Cancel</string>
+
+    <string name="select_date">Select date</string>
+
+    <string name="user_profile">User Profile</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="country">Country</string>
+    <string name="description">Description</string>
+    <string name="profession">Profession</string>
+    <string name="save">Save</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="delete_account">Delete Account</string>
 </resources>

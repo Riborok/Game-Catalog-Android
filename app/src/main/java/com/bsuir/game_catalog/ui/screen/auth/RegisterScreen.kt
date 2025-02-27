@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
 import com.bsuir.game_catalog.Routes
-import com.bsuir.game_catalog.ui.component.auth.AuthBox
+import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.auth.card.RegisterCard
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -34,7 +34,7 @@ fun RegisterScreen(
         }
     }
 
-    AuthBox {
+    Background {
         RegisterCard(
             email = email,
             onEmailChange = { email = it },

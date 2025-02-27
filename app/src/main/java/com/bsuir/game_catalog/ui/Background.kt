@@ -1,4 +1,4 @@
-package com.bsuir.game_catalog.ui.component.auth
+package com.bsuir.game_catalog.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 
 @Composable
-fun AuthBox(content: @Composable BoxScope.() -> Unit) {
+fun Background(content: @Composable BoxScope.() -> Unit) {
     val colors = MaterialTheme.colorScheme
     Box(
         modifier = Modifier

@@ -1,18 +1,23 @@
 package com.bsuir.game_catalog
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bsuir.game_catalog.ui.screen.auth.LoginScreen
 import com.bsuir.game_catalog.ui.screen.auth.RegisterScreen
+import com.bsuir.game_catalog.ui.screen.profile.ProfileScreen
 import com.bsuir.game_catalog.ui.theme.GameCatalogTheme
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
+import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,17 +25,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GameCatalogTheme {
-                val authViewModel = remember {
-                    ViewModelProvider(
-                        this,
-                        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-                    )[AuthViewModel::class.java]
-                }
+                val authViewModel = remember { getAndroidViewModel<AuthViewModel>(this, application) }
+                val profileViewModel = remember { getAndroidViewModel<ProfileViewModel>(this, application) }
+
                 val navController = rememberNavController()
+                val initialDestination = remember { getInitialDest(authViewModel) }
 
                 NavHost(
                     navController = navController,
-                    startDestination = if (authViewModel.user.value != null) Routes.MAIN else Routes.AUTH
+                    startDestination = initialDestination
                 ) {
                     composable(Routes.AUTH) {
                         LoginScreen(
@@ -45,8 +48,9 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable(Routes.MAIN) {
-                        MainContent(
+                        ProfileScreen(
                             authViewModel = authViewModel,
+                            profileViewModel = profileViewModel,
                             navController = navController,
                         )
                     }
@@ -55,3 +59,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+inline fun <reified T : ViewModel> getAndroidViewModel(
+    owner: ViewModelStoreOwner,
+    application: Application
+): T {
+    return ViewModelProvider(
+        owner,
+        ViewModelProvider.AndroidViewModelFactory.getInstance(application)
+    )[T::class.java]
+}
+
+fun getInitialDest(authViewModel: AuthViewModel): String =
+    if (authViewModel.user.value != null) Routes.MAIN else Routes.AUTH
