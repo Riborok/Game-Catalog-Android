@@ -14,11 +14,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.bsuir.game_catalog.ui.screen.auth.LoginScreen
 import com.bsuir.game_catalog.ui.screen.auth.RegisterScreen
-import com.bsuir.game_catalog.ui.screen.profile.ProfileScreen
+import com.bsuir.game_catalog.ui.screen.main.MainScreen
 import com.bsuir.game_catalog.ui.theme.GameCatalogTheme
+import com.bsuir.game_catalog.utils.AuthRoute
 import com.bsuir.game_catalog.utils.NavigateToLoginIfUnauthenticated
-import com.bsuir.game_catalog.utils.NavigateToProfileIfAuthenticated
-import com.bsuir.game_catalog.utils.Route
+import com.bsuir.game_catalog.utils.NavigateToMainIfAuthenticated
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
@@ -32,29 +32,29 @@ class MainActivity : ComponentActivity() {
                 val profileViewModel = remember { getAndroidViewModel<ProfileViewModel>(application) }
 
                 val navController = rememberNavController()
-                val initialDestination = remember { Route.getInitialRoute(authViewModel) }
+                val initialDestination = remember { AuthRoute.getInitialRoute(authViewModel) }
 
                 NavHost(
                     navController = navController,
                     startDestination = initialDestination
                 ) {
-                    composable(Route.LOGIN) {
-                        NavigateToProfileIfAuthenticated(authViewModel, navController)
+                    composable(AuthRoute.LOGIN) {
+                        NavigateToMainIfAuthenticated(authViewModel, navController)
                         LoginScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
-                    composable(Route.REGISTER) {
-                        NavigateToProfileIfAuthenticated(authViewModel, navController)
+                    composable(AuthRoute.REGISTER) {
+                        NavigateToMainIfAuthenticated(authViewModel, navController)
                         RegisterScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
-                    composable(Route.PROFILE) {
+                    composable(AuthRoute.MAIN) {
                         NavigateToLoginIfUnauthenticated(authViewModel, navController)
-                        ProfileScreen(
+                        MainScreen(
                             authViewModel = authViewModel,
                             profileViewModel = profileViewModel,
                         )

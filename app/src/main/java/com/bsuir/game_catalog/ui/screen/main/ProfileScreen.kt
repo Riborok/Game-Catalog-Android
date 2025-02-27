@@ -1,4 +1,4 @@
-package com.bsuir.game_catalog.ui.screen.profile
+package com.bsuir.game_catalog.ui.screen.main
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

@@ -2,11 +2,11 @@ package com.bsuir.game_catalog.utils
 
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 
-object Route {
+object AuthRoute {
     const val LOGIN = "login"
     const val REGISTER = "register"
-    const val PROFILE = "profile"
+    const val MAIN = "profile"
 
     fun getInitialRoute(authViewModel: AuthViewModel): String =
-        if (authViewModel.user.value != null) PROFILE else LOGIN
+        if (authViewModel.user.value != null) MAIN else LOGIN
 }

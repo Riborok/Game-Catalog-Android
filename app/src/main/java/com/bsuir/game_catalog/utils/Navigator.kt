@@ -7,12 +7,12 @@ import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun NavigateToProfileIfAuthenticated(authViewModel: AuthViewModel, navController: NavController) {
+fun NavigateToMainIfAuthenticated(authViewModel: AuthViewModel, navController: NavController) {
     LaunchedEffect(Unit) {
         authViewModel.user.collectLatest { user ->
             if (user != null) {
-                navController.navigate(Route.PROFILE) {
-                    popUpTo(Route.LOGIN) { inclusive = true }
+                navController.navigate(AuthRoute.MAIN) {
+                    popUpTo(AuthRoute.LOGIN) { inclusive = true }
                 }
             }
         }
@@ -24,8 +24,8 @@ fun NavigateToLoginIfUnauthenticated(authViewModel: AuthViewModel, navController
     LaunchedEffect(Unit) {
         authViewModel.user.collectLatest { user ->
             if (user == null) {
-                navController.navigate(Route.LOGIN) {
-                    popUpTo(Route.PROFILE) { inclusive = true }
+                navController.navigate(AuthRoute.LOGIN) {
+                    popUpTo(AuthRoute.MAIN) { inclusive = true }
                 }
             }
         }

@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.auth.card.LoginCard
 import com.bsuir.game_catalog.ui.component.error.ErrorNotification
-import com.bsuir.game_catalog.utils.Route
+import com.bsuir.game_catalog.utils.AuthRoute
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 
 @Composable
@@ -27,7 +27,7 @@ fun LoginScreen(
             password = password,
             onPasswordChange = { password = it },
             onSignIn = { authViewModel.signIn(email, password) },
-            onToggleCard = { navController.navigate(Route.REGISTER) },
+            onToggleCard = { navController.navigate(AuthRoute.REGISTER) },
         )
         ErrorNotification(authViewModel)
     }

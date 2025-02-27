@@ -46,4 +46,8 @@
     <string name="save">Save</string>
     <string name="sign_out">Sign Out</string>
     <string name="delete_account">Delete Account</string>
+
+    <string name="games">Games</string>
+
+    <string name="favorite">Favorite</string>
 </resources>

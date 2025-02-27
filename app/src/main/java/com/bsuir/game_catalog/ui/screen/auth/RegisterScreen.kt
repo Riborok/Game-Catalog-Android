@@ -9,7 +9,7 @@ import androidx.navigation.NavController
 import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.auth.card.RegisterCard
 import com.bsuir.game_catalog.ui.component.error.ErrorNotification
-import com.bsuir.game_catalog.utils.Route
+import com.bsuir.game_catalog.utils.AuthRoute
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 
 @Composable
@@ -27,7 +27,7 @@ fun RegisterScreen(
             password = password,
             onPasswordChange = { password = it },
             onSignUp = { authViewModel.signUp(email, password) },
-            onToggleCard = { navController.navigate(Route.LOGIN) },
+            onToggleCard = { navController.navigate(AuthRoute.LOGIN) },
         )
         ErrorNotification(authViewModel)
     }
