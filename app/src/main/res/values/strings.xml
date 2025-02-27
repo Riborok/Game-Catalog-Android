@@ -23,6 +23,9 @@
     <string name="avatar_url_dialog_url_label">URL</string>
 
     <string name="error">Error</string>
+    <string name="approval">Approval</string>
+
+    <string name="profile_updated_successfully">Profile data updated successfully</string>
 
     <string name="ok_button">ОK</string>
     <string name="cancel_button">Cancel</string>

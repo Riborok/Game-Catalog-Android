@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class ProfileViewModel(application: Application) : ErrorHandlingViewModel(application) {
+class ProfileViewModel(application: Application) : StatusHandlingViewModel(application) {
     private val repository = ProfileRepository()
 
     private val _userProfile = MutableStateFlow(UserProfile())
@@ -32,11 +32,14 @@ class ProfileViewModel(application: Application) : ErrorHandlingViewModel(applic
     }
 
     private fun loadUserProfile() {
-        repository.getUserProfile { onResult(it, R.string.profile_load_failed) }
+        repository.getUserProfile { result -> onResult(result, R.string.profile_load_failed) }
     }
 
     fun saveUserProfile(profile: UserProfile) {
-        repository.saveUserProfile(profile) { onResult(it, R.string.profile_save_failed) }
+        repository.saveUserProfile(profile) { result ->
+            result.onSuccess { _isApproved.value = true }
+            onResult(result, R.string.profile_save_failed)
+        }
     }
 
     private fun onResult(result: Result<*>, errorStrId: Int) {

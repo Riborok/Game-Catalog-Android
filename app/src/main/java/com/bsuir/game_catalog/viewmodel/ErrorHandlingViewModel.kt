@@ -9,7 +9,7 @@ abstract class ErrorHandlingViewModel(application: Application) : AndroidViewMod
     protected val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage = _errorMessage.asStateFlow()
 
-    fun clearError() {
+    fun resetError() {
         _errorMessage.value = null
     }
 }

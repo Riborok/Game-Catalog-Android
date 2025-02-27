@@ -12,7 +12,7 @@ fun ErrorNotification(errorHandlingViewModel: ErrorHandlingViewModel) {
     errorMessage?.let {
         ErrorDialog(
             errorMessage = it,
-            onDismiss = errorHandlingViewModel::clearError
+            onDismiss = errorHandlingViewModel::resetError
         )
     }
 }

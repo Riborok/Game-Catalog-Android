@@ -15,11 +15,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.error.ErrorNotification
 import com.bsuir.game_catalog.ui.component.profile.card.DataCard
 import com.bsuir.game_catalog.ui.component.profile.card.ProfileCard
+import com.bsuir.game_catalog.ui.component.status.StatusNotification
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -61,7 +63,7 @@ fun ProfileScreen(
                 onDeleteAccount = { authViewModel.deleteAccount() }
             )
             ErrorNotification(authViewModel)
-            ErrorNotification(profileViewModel)
+            StatusNotification(R.string.profile_updated_successfully, profileViewModel)
         }
     }
 }
