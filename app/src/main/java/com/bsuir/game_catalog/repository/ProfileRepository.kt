@@ -1,6 +1,6 @@
 package com.bsuir.game_catalog.repository
 
-import com.bsuir.game_catalog.FireCollection
+import com.bsuir.game_catalog.utils.FireCollection
 import com.bsuir.game_catalog.model.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

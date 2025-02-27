@@ -1,4 +1,4 @@
-package com.bsuir.game_catalog
+package com.bsuir.game_catalog.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,8 +11,8 @@ fun NavigateToProfileIfAuthenticated(authViewModel: AuthViewModel, navController
     LaunchedEffect(Unit) {
         authViewModel.user.collectLatest { user ->
             if (user != null) {
-                navController.navigate(Routes.PROFILE) {
-                    popUpTo(Routes.LOGIN) { inclusive = true }
+                navController.navigate(Route.PROFILE) {
+                    popUpTo(Route.LOGIN) { inclusive = true }
                 }
             }
         }
@@ -24,8 +24,8 @@ fun NavigateToLoginIfUnauthenticated(authViewModel: AuthViewModel, navController
     LaunchedEffect(Unit) {
         authViewModel.user.collectLatest { user ->
             if (user == null) {
-                navController.navigate(Routes.LOGIN) {
-                    popUpTo(Routes.PROFILE) { inclusive = true }
+                navController.navigate(Route.LOGIN) {
+                    popUpTo(Route.PROFILE) { inclusive = true }
                 }
             }
         }

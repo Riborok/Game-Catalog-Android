@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
-import com.bsuir.game_catalog.Routes
+import com.bsuir.game_catalog.utils.Route
 import com.bsuir.game_catalog.ui.Background
 import com.bsuir.game_catalog.ui.component.auth.card.RegisterCard
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
@@ -30,7 +30,7 @@ fun RegisterScreen(
             onPasswordChange = { password = it },
             errorMessage = errorMessage,
             onSignUp = { authViewModel.signUp(email, password) },
-            onToggleCard = { navController.navigate(Routes.LOGIN) }
+            onToggleCard = { navController.navigate(Route.LOGIN) }
         )
     }
 }
