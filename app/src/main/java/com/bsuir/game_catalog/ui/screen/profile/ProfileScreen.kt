@@ -30,24 +30,12 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun ProfileScreen(
     authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel,
-    navController: NavController
+    profileViewModel: ProfileViewModel
 ) {
-    LaunchedEffect(Unit) {
-        authViewModel.user.collectLatest { user ->
-            if (user == null) {
-                navController.navigate(Routes.AUTH) {
-                    popUpTo(Routes.MAIN) { inclusive = true }
-                }
-            }
-        }
-    }
-
     var userProfile by remember { mutableStateOf(profileViewModel.userProfile.value) }
     val onUserProfileChange = { newUserProfile: UserProfile ->
         userProfile = newUserProfile
     }
-
     LaunchedEffect(Unit) {
         profileViewModel.userProfile.collectLatest { newUserProfile ->
             if (userProfile != newUserProfile) {

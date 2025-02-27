@@ -24,16 +24,6 @@ fun LoginScreen(
 
     val errorMessage by authViewModel.errorMessage.collectAsState()
 
-    LaunchedEffect(Unit) {
-        authViewModel.user.collectLatest { user ->
-            if (user != null) {
-                navController.navigate(Routes.MAIN) {
-                    popUpTo(Routes.AUTH) { inclusive = true }
-                }
-            }
-        }
-    }
-
     Background {
         LoginCard(
             email = email,

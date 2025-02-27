@@ -36,22 +36,24 @@ class MainActivity : ComponentActivity() {
                     startDestination = initialDestination
                 ) {
                     composable(Routes.AUTH) {
+                        NavigateToMainIfAuthenticated(authViewModel, navController)
                         LoginScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
                     composable(Routes.REGISTER) {
+                        NavigateToMainIfAuthenticated(authViewModel, navController)
                         RegisterScreen(
                             authViewModel = authViewModel,
                             navController = navController,
                         )
                     }
                     composable(Routes.MAIN) {
+                        NavigateToAuthIfUnauthenticated(authViewModel, navController)
                         ProfileScreen(
                             authViewModel = authViewModel,
                             profileViewModel = profileViewModel,
-                            navController = navController,
                         )
                     }
                 }
