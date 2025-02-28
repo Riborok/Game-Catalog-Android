@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.bsuir.game_catalog.R
+import com.bsuir.game_catalog.ui.component.general.ClickableOutlinedTextField
 import java.util.Calendar
 import java.util.Locale
 
@@ -24,37 +25,27 @@ fun DatePickerField(
     onDateSelected: (String) -> Unit
 ) {
     val context = LocalContext.current
-    val datePickerDialog = remember {
-        DatePickerDialog(
-            context,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                val formattedDate = String.format(
-                    Locale.getDefault(),
-                    "%02d/%02d/%d",
-                    selectedDay,
-                    selectedMonth + 1,
-                    selectedYear
-                )
-                onDateSelected(formattedDate)
-            },
-            Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        )
-    }
+    val datePickerDialog = DatePickerDialog(
+        context,
+        { _, selectedYear, selectedMonth, selectedDay ->
+            val formattedDate = String.format(
+                Locale.getDefault(),
+                "%02d/%02d/%d",
+                selectedDay,
+                selectedMonth + 1,
+                selectedYear
+            )
+            onDateSelected(formattedDate)
+        },
+        Calendar.getInstance().get(Calendar.YEAR),
+        Calendar.getInstance().get(Calendar.MONTH),
+        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    )
 
-    OutlinedTextField(
+    ClickableOutlinedTextField(
         value = date,
-        onValueChange = {},
-        label = { Text(label) },
-        readOnly = true,
-        modifier = Modifier
-            .fillMaxWidth()
-            .onFocusChanged { focusState ->
-                if (focusState.isFocused) {
-                    datePickerDialog.show()
-                }
-            },
+        onClick = datePickerDialog::show,
+        label = label,
         trailingIcon = {
             Icon(Icons.Default.DateRange, contentDescription = stringResource(R.string.select_date))
         }
