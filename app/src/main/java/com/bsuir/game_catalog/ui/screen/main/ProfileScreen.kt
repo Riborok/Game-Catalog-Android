@@ -1,14 +1,10 @@
 package com.bsuir.game_catalog.ui.screen.main
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,35 +20,31 @@ import com.bsuir.game_catalog.ui.component.profile.card.ProfileCard
 import com.bsuir.game_catalog.ui.component.status.StatusNotification
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ProfileScreen(
     authViewModel: AuthViewModel,
     profileViewModel: ProfileViewModel
 ) {
-    var userProfile by remember { mutableStateOf(profileViewModel.userProfile.value) }
-    val onUserProfileChange = { newUserProfile: UserProfile ->
-        userProfile = newUserProfile
+    val remoteUserProfile by profileViewModel.userProfile.collectAsState()
+    var localUserProfile by remember { mutableStateOf(remoteUserProfile) }
+    LaunchedEffect(remoteUserProfile) {
+        localUserProfile = remoteUserProfile
     }
-    LaunchedEffect(Unit) {
-        profileViewModel.userProfile.collectLatest { newUserProfile ->
-            if (userProfile != newUserProfile) {
-                userProfile = newUserProfile
-            }
-        }
+    val onLocalUserProfileChange = { newUserProfile: UserProfile ->
+        localUserProfile = newUserProfile
     }
 
     ProfileBackground {
         ProfileCard(
-            userProfile = userProfile,
-            onUserProfileChange = onUserProfileChange
+            userProfile = localUserProfile,
+            onUserProfileChange = onLocalUserProfileChange
         )
         Spacer(modifier = Modifier.height(16.dp))
         DataCard(
-            userProfile = userProfile,
-            onUserProfileChange = onUserProfileChange,
-            onSaveProfile = { profileViewModel.saveUserProfile(userProfile) },
+            userProfile = localUserProfile,
+            onUserProfileChange = onLocalUserProfileChange,
+            onSaveProfile = { profileViewModel.saveUserProfile(localUserProfile) },
             onSignOut = { authViewModel.signOut() },
             onDeleteAccount = { authViewModel.deleteAccount() }
         )
