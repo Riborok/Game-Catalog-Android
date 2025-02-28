@@ -14,25 +14,33 @@ class ProfileRepository {
 
     fun getUserProfile(onResult: (Result<UserProfile>) -> Unit) {
         validateUid(onResult) {
-            firestore.collection(FireCollection.USERS)
-                .document(uid!!)
-                .get()
-                .addOnSuccessListener { document ->
-                    val profile = document.toObject(UserProfile::class.java) ?: UserProfile()
-                    onResult(Result.success(profile))
-                }
-                .addOnFailureListener { onFailureListener(it, onResult) }
+            getUserProfile(uid!!, onResult)
         }
+    }
+
+    fun getUserProfile(docId: String, onResult: (Result<UserProfile>) -> Unit) {
+        firestore.collection(FireCollection.USERS)
+            .document(docId)
+            .get()
+            .addOnSuccessListener { document ->
+                val profile = document.toObject(UserProfile::class.java) ?: UserProfile()
+                onResult(Result.success(profile))
+            }
+            .addOnFailureListener { onFailureListener(it, onResult) }
     }
 
     fun saveUserProfile(profile: UserProfile, onResult: (Result<UserProfile>) -> Unit) {
         validateUid(onResult) {
-            firestore.collection(FireCollection.USERS)
-                .document(uid!!)
-                .set(profile)
-                .addOnSuccessListener { onResult(Result.success(profile)) }
-                .addOnFailureListener { onFailureListener(it, onResult) }
+            saveUserProfile(uid!!, profile, onResult)
         }
+    }
+
+    fun saveUserProfile(docId: String, profile: UserProfile, onResult: (Result<UserProfile>) -> Unit) {
+        firestore.collection(FireCollection.USERS)
+            .document(docId)
+            .set(profile)
+            .addOnSuccessListener { onResult(Result.success(profile)) }
+            .addOnFailureListener { onFailureListener(it, onResult) }
     }
 
     private fun validateUid(

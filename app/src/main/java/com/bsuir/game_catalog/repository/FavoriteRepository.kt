@@ -14,17 +14,21 @@ class FavoriteRepository {
 
     fun getFavorites(onResult: (Result<List<String>>) -> Unit) {
         validateUid(onResult) {
-            firestore.collection(FireCollection.FAVORITES)
-                .document(uid!!)
-                .get()
-                .addOnSuccessListener { document ->
-                    val favorite = document.toObject(Favorite::class.java)
-                    onResult(Result.success(favorite?.games ?: emptyList()))
-                }
-                .addOnFailureListener { exception ->
-                    onResult(Result.failure(exception))
-                }
+            getFavorites(uid!!, onResult)
         }
+    }
+
+    fun getFavorites(docId: String, onResult: (Result<List<String>>) -> Unit) {
+        firestore.collection(FireCollection.FAVORITES)
+            .document(docId)
+            .get()
+            .addOnSuccessListener { document ->
+                val favorite = document.toObject(Favorite::class.java)
+                onResult(Result.success(favorite?.games ?: emptyList()))
+            }
+            .addOnFailureListener { exception ->
+                onResult(Result.failure(exception))
+            }
     }
 
     fun addGameToFavorites(gameId: String, onResult: (Result<List<String>>) -> Unit) {
@@ -39,25 +43,34 @@ class FavoriteRepository {
         }
     }
 
-    private fun updateFavorites(
+    fun updateFavorites(
         gameId: String,
         onResult: (Result<List<String>>) -> Unit,
         update: (Favorite, String) -> List<String>
     ) {
         validateUid(onResult) {
-            val favoritesRef = firestore.collection(FireCollection.FAVORITES)
-                .document(uid!!)
+            updateFavorites(uid!!, gameId, onResult, update)
+        }
+    }
 
-            firestore.runTransaction { transaction ->
-                val snapshot = transaction.get(favoritesRef)
-                val favorite = snapshot.toObject(Favorite::class.java) ?: Favorite(emptyList())
-                val updatedFavorites = update(favorite, gameId)
-                transaction.set(favoritesRef, Favorite(updatedFavorites))
-            }.addOnSuccessListener {
-                getFavorites(onResult)
-            }.addOnFailureListener { exception ->
-                onResult(Result.failure(exception))
-            }
+    fun updateFavorites(
+        docId: String,
+        gameId: String,
+        onResult: (Result<List<String>>) -> Unit,
+        update: (Favorite, String) -> List<String>
+    ) {
+        val favoritesRef = firestore.collection(FireCollection.FAVORITES)
+            .document(docId)
+
+        firestore.runTransaction { transaction ->
+            val snapshot = transaction.get(favoritesRef)
+            val favorite = snapshot.toObject(Favorite::class.java) ?: Favorite(emptyList())
+            val updatedFavorites = update(favorite, gameId)
+            transaction.set(favoritesRef, Favorite(updatedFavorites))
+        }.addOnSuccessListener {
+            getFavorites(onResult)
+        }.addOnFailureListener { exception ->
+            onResult(Result.failure(exception))
         }
     }
 
