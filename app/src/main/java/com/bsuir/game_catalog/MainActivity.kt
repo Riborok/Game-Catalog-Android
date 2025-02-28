@@ -20,6 +20,8 @@ import com.bsuir.game_catalog.utils.AuthRoute
 import com.bsuir.game_catalog.utils.NavigateToLoginIfUnauthenticated
 import com.bsuir.game_catalog.utils.NavigateToMainIfAuthenticated
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
+import com.bsuir.game_catalog.viewmodel.FavoriteViewModel
+import com.bsuir.game_catalog.viewmodel.GameViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
 class MainActivity : ComponentActivity() {
@@ -28,8 +30,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GameCatalogTheme {
-                val authViewModel = remember { getAndroidViewModel<AuthViewModel>(application) }
-                val profileViewModel = remember { getAndroidViewModel<ProfileViewModel>(application) }
+                val authViewModel =
+                    remember { getAndroidViewModel<AuthViewModel>(application) }
+                val profileViewModel =
+                    remember { getAndroidViewModel<ProfileViewModel>(application) }
+                val gameViewModel =
+                    remember { getAndroidViewModel<GameViewModel>(application) }
+                val favoriteViewModel =
+                    remember { getAndroidViewModel<FavoriteViewModel>(application) }
 
                 val navController = rememberNavController()
                 val initialDestination = remember { AuthRoute.getInitialRoute(authViewModel) }
@@ -57,6 +65,8 @@ class MainActivity : ComponentActivity() {
                         MainScreen(
                             authViewModel = authViewModel,
                             profileViewModel = profileViewModel,
+                            gameViewModel = gameViewModel,
+                            favoriteViewModel = favoriteViewModel
                         )
                     }
                 }

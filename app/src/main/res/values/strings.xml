@@ -50,4 +50,10 @@
     <string name="games">Games</string>
 
     <string name="favorite">Favorite</string>
+
+    <string name="games_load_failed">Error while loading game catalog</string>
+
+    <string name="favorites_load_failed">Failed to load favorites</string>
+    <string name="favorite_add_failed">Failed to add game to favorites</string>
+    <string name="favorite_remove_failed">Failed to remove game from favorites</string>
 </resources>

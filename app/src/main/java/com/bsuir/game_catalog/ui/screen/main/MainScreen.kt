@@ -3,21 +3,28 @@ package com.bsuir.game_catalog.ui.screen.main
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.bsuir.game_catalog.ui.component.nav.BottomNavigationBar
 import com.bsuir.game_catalog.utils.MainRoute
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
+import com.bsuir.game_catalog.viewmodel.FavoriteViewModel
+import com.bsuir.game_catalog.viewmodel.GameViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
 
 @Composable
 fun MainScreen(
     authViewModel: AuthViewModel,
-    profileViewModel: ProfileViewModel
+    profileViewModel: ProfileViewModel,
+    gameViewModel: GameViewModel,
+    favoriteViewModel: FavoriteViewModel
 ) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -41,10 +48,47 @@ fun MainScreen(
                 )
             }
             composable(MainRoute.GAME_LIST) {
-                GameListScreen()
+                val games by gameViewModel.games.collectAsState()
+                val favorites by favoriteViewModel.favoriteGames.collectAsState()
+                GameListScreen(
+                    games = games,
+                    favorites = favorites,
+                    onClickOnGame = { gameId: String ->
+                        navController.navigate("${MainRoute.GAME_DETAIL}/${gameId}")
+                    }
+                )
             }
             composable(MainRoute.FAVORITES) {
-                FavoritesScreen()
+                val games by gameViewModel.games.collectAsState()
+                val favorites by favoriteViewModel.favoriteGames.collectAsState()
+                GameListScreen(
+                    games = games.filter { it.id in favorites },
+                    favorites = favorites,
+                    onClickOnGame = { gameId: String ->
+                        navController.navigate("${MainRoute.GAME_DETAIL}/${gameId}")
+                    }
+                )
+            }
+            composable(
+                "${MainRoute.GAME_DETAIL}/{gameId}",
+                arguments = listOf(navArgument("gameId") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val gameId = backStackEntry.arguments?.getString("gameId")
+                val games by gameViewModel.games.collectAsState()
+                val favorites by favoriteViewModel.favoriteGames.collectAsState()
+                val isFavorite = favorites.contains(gameId)
+                GameScreen(
+                    games.find { it.id == gameId }!!,
+                    isFavorite = isFavorite,
+                    onBackClick = { navController.popBackStack() },
+                    onFavoriteClick = {
+                        if (isFavorite) {
+                            favoriteViewModel.removeGameFromFavorites(gameId!!)
+                        } else {
+                            favoriteViewModel.addGameToFavorites(gameId!!)
+                        }
+                    }
+                )
             }
         }
     }
