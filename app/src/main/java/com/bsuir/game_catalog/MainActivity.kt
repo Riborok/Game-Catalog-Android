@@ -5,7 +5,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -31,47 +36,53 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GameCatalogTheme {
-                val authViewModel =
-                    remember { getAndroidViewModel<AuthViewModel>(application) }
-                val profileViewModel =
-                    remember { getAndroidViewModel<ProfileViewModel>(application) }
-                val gameViewModel =
-                    remember { getAndroidViewModel<GameViewModel>(application) }
-                val favoriteViewModel =
-                    remember { getAndroidViewModel<FavoriteViewModel>(application) }
-                val reviewViewModel =
-                    remember { getAndroidViewModel<ReviewViewModel>(application) }
-
-                val navController = rememberNavController()
-                val initialDestination = remember { AuthRoute.getInitialRoute(authViewModel) }
-
-                NavHost(
-                    navController = navController,
-                    startDestination = initialDestination
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
                 ) {
-                    composable(AuthRoute.LOGIN) {
-                        NavigateToMainIfAuthenticated(authViewModel, navController)
-                        LoginScreen(
-                            authViewModel = authViewModel,
-                            navController = navController,
-                        )
-                    }
-                    composable(AuthRoute.REGISTER) {
-                        NavigateToMainIfAuthenticated(authViewModel, navController)
-                        RegisterScreen(
-                            authViewModel = authViewModel,
-                            navController = navController,
-                        )
-                    }
-                    composable(AuthRoute.MAIN) {
-                        NavigateToLoginIfUnauthenticated(authViewModel, navController)
-                        MainScreen(
-                            authViewModel = authViewModel,
-                            profileViewModel = profileViewModel,
-                            gameViewModel = gameViewModel,
-                            favoriteViewModel = favoriteViewModel,
-                            reviewViewModel = reviewViewModel
-                        )
+                    val authViewModel =
+                        remember { getAndroidViewModel<AuthViewModel>(application) }
+                    val profileViewModel =
+                        remember { getAndroidViewModel<ProfileViewModel>(application) }
+                    val gameViewModel =
+                        remember { getAndroidViewModel<GameViewModel>(application) }
+                    val favoriteViewModel =
+                        remember { getAndroidViewModel<FavoriteViewModel>(application) }
+                    val reviewViewModel =
+                        remember { getAndroidViewModel<ReviewViewModel>(application) }
+
+                    val navController = rememberNavController()
+                    val initialDestination = remember { AuthRoute.getInitialRoute(authViewModel) }
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = initialDestination
+                    ) {
+                        composable(AuthRoute.LOGIN) {
+                            NavigateToMainIfAuthenticated(authViewModel, navController)
+                            LoginScreen(
+                                authViewModel = authViewModel,
+                                navController = navController,
+                            )
+                        }
+                        composable(AuthRoute.REGISTER) {
+                            NavigateToMainIfAuthenticated(authViewModel, navController)
+                            RegisterScreen(
+                                authViewModel = authViewModel,
+                                navController = navController,
+                            )
+                        }
+                        composable(AuthRoute.MAIN) {
+                            NavigateToLoginIfUnauthenticated(authViewModel, navController)
+                            MainScreen(
+                                authViewModel = authViewModel,
+                                profileViewModel = profileViewModel,
+                                gameViewModel = gameViewModel,
+                                favoriteViewModel = favoriteViewModel,
+                                reviewViewModel = reviewViewModel
+                            )
+                        }
                     }
                 }
             }

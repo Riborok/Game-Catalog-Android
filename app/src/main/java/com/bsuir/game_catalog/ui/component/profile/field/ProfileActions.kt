@@ -26,12 +26,13 @@ fun ProfileActions(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Button(
-            modifier = Modifier.fillMaxWidth(0.65f),
+            modifier = Modifier.weight(1.5f),
             onClick = onSaveProfile
         ) {
             Text(stringResource(R.string.save))
         }
-        Button(modifier = Modifier.fillMaxWidth(0.9f),
+        Spacer(modifier = Modifier.weight(0.1f))
+        Button(modifier = Modifier.weight(1f),
             onClick = onSignOut
         ) {
             Text(stringResource(R.string.sign_out))

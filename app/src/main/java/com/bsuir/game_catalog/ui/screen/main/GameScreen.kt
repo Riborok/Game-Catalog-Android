@@ -38,6 +38,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -73,6 +74,9 @@ fun GameScreen(
     val context = LocalContext.current
 
     val reviews by reviewViewModel.reviews.collectAsState()
+    LaunchedEffect(Unit) {
+        reviewViewModel.loadReviews(game.id)
+    }
 
     var newCommentText by rememberSaveable { mutableStateOf("") }
     var newRatingText by rememberSaveable { mutableStateOf("") }
@@ -117,8 +121,6 @@ fun GameScreen(
                 )
             }
         }
-
-
 
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
@@ -289,8 +291,8 @@ fun GameScreen(
             Button(
                 onClick = {
                     val uid = authViewModel.user.value?.uid
-                    if (uid != null) {
-                        val rating = newRatingText.toIntOrNull() ?: 0
+                    val rating = newRatingText.toIntOrNull()
+                    if (uid != null && rating != null) {
 
                         val request = ReviewRequest(
                             userId = uid,

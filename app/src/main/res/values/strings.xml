@@ -17,7 +17,7 @@
     <string name="sign_up_button">Sign Up</string>
 
     <string name="sign_up_toggle">Don\'t have an account?</string>
-    <string name="sign_in_toggle">Already have an account?</string>
+    <string name="sign_in_toggle">Have an account?</string>
 
     <string name="avatar_url_dialog_title">Enter Image URL</string>
     <string name="avatar_url_dialog_url_label">URL</string>
