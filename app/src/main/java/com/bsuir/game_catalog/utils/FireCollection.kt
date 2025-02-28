@@ -4,4 +4,5 @@ object FireCollection {
     const val USERS = "users"
     const val GAMES = "games"
     const val FAVORITES = "favorites"
+    const val REVIEWS = "reviews"
 }

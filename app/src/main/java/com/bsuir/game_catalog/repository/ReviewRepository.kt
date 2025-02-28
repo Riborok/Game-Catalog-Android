@@ -16,7 +16,7 @@ class ReviewRepository {
         request: ReviewRequest,
         onResult: (Result<ReviewResponse>) -> Unit
     ) {
-        firestore.collection("reviews")
+        firestore.collection(FireCollection.REVIEWS)
             .add(request)
             .addOnSuccessListener { docRef ->
                 docRef.get().addOnSuccessListener { document ->
@@ -47,7 +47,7 @@ class ReviewRepository {
         gameId: String,
         onResult: (Result<List<ReviewResponse>>) -> Unit
     ) {
-        firestore.collection("reviews")
+        firestore.collection(FireCollection.REVIEWS)
             .whereEqualTo("gameId", gameId)
             .get()
             .addOnSuccessListener { querySnapshot ->
