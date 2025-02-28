@@ -23,6 +23,7 @@ import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.FavoriteViewModel
 import com.bsuir.game_catalog.viewmodel.GameViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
+import com.bsuir.game_catalog.viewmodel.ReviewViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +39,8 @@ class MainActivity : ComponentActivity() {
                     remember { getAndroidViewModel<GameViewModel>(application) }
                 val favoriteViewModel =
                     remember { getAndroidViewModel<FavoriteViewModel>(application) }
+                val reviewViewModel =
+                    remember { getAndroidViewModel<ReviewViewModel>(application) }
 
                 val navController = rememberNavController()
                 val initialDestination = remember { AuthRoute.getInitialRoute(authViewModel) }
@@ -66,7 +69,8 @@ class MainActivity : ComponentActivity() {
                             authViewModel = authViewModel,
                             profileViewModel = profileViewModel,
                             gameViewModel = gameViewModel,
-                            favoriteViewModel = favoriteViewModel
+                            favoriteViewModel = favoriteViewModel,
+                            reviewViewModel = reviewViewModel
                         )
                     }
                 }

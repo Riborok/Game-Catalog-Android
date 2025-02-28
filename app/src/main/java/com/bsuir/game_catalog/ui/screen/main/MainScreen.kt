@@ -18,13 +18,15 @@ import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.FavoriteViewModel
 import com.bsuir.game_catalog.viewmodel.GameViewModel
 import com.bsuir.game_catalog.viewmodel.ProfileViewModel
+import com.bsuir.game_catalog.viewmodel.ReviewViewModel
 
 @Composable
 fun MainScreen(
     authViewModel: AuthViewModel,
     profileViewModel: ProfileViewModel,
     gameViewModel: GameViewModel,
-    favoriteViewModel: FavoriteViewModel
+    favoriteViewModel: FavoriteViewModel,
+    reviewViewModel: ReviewViewModel,
 ) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -78,7 +80,9 @@ fun MainScreen(
                 val favorites by favoriteViewModel.favoriteGames.collectAsState()
                 val isFavorite = favorites.contains(gameId)
                 GameScreen(
-                    games.find { it.id == gameId }!!,
+                    authViewModel = authViewModel,
+                    reviewViewModel = reviewViewModel,
+                    game = games.find { it.id == gameId }!!,
                     isFavorite = isFavorite,
                     onBackClick = { navController.popBackStack() },
                     onFavoriteClick = {

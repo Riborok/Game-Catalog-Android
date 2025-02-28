@@ -56,4 +56,7 @@
     <string name="favorites_load_failed">Failed to load favorites</string>
     <string name="favorite_add_failed">Failed to add game to favorites</string>
     <string name="favorite_remove_failed">Failed to remove game from favorites</string>
+
+    <string name="review_create_failed">Failed to create review</string>
+    <string name="reviews_load_failed">Failed to load reviews</string>
 </resources>

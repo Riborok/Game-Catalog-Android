@@ -128,7 +128,7 @@ fun GameListScreen(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Box(modifier = Modifier.weight(1f)) {
+            Box(modifier = Modifier.weight(1.5f)) {
                 ClickableOutlinedTextField(
                     value = selectedCompany ?: "All companies",
                     onClick = { companyDropdownExpanded = true },
