@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.repository.ProfileRepository
+import com.bsuir.game_catalog.utils.AuthStateTracker
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -21,7 +22,7 @@ class ProfileViewModel(application: Application) : StatusHandlingViewModel(appli
 
     private fun observeUserAuthState() {
         viewModelScope.launch {
-            repository.observeAuthState().collect { firebaseUser ->
+            AuthStateTracker.observeAuthState().collect { firebaseUser ->
                 if (firebaseUser != null) {
                     loadUserProfile()
                 } else {
