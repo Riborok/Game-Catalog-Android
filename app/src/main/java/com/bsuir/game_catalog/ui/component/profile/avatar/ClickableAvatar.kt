@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.bsuir.game_catalog.R
 
 @Composable
 fun ClickableAvatar(
@@ -31,14 +33,14 @@ fun ClickableAvatar(
         if (avatarUrl.isNotBlank()) {
             AsyncImage(
                 model = avatarUrl,
-                contentDescription = "Avatar",
+                contentDescription = stringResource(R.string.avatar),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxSize()
             )
         } else {
             Icon(
                 imageVector = Icons.Default.AccountCircle,
-                contentDescription = "Default Avatar",
+                contentDescription = stringResource(R.string.default_avatar),
                 tint = colors.primary,
                 modifier = Modifier.fillMaxSize()
             )

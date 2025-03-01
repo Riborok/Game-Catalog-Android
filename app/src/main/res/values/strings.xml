@@ -32,6 +32,9 @@
 
     <string name="select_date">Select date</string>
 
+    <string name="avatar">Avatar</string>
+    <string name="default_avatar">Default Avatar</string>
+
     <string name="user_profile">User Profile</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
