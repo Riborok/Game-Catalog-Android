@@ -66,7 +66,9 @@
     <string name="game_image">Game image</string>
     <string name="back">Back</string>
     <string name="company">Company</string>
+    <string name="all_company">All companies</string>
     <string name="release_date">Release date</string>
+    <string name="released">Released</string>
     <string name="official_website">Official website</string>
 
     <string name="comments">Comments</string>
@@ -74,4 +76,11 @@
     <string name="add_comment">Add your comment</string>
     <string name="rating">Rating (1–5)</string>
     <string name="submit">Submit</string>
+
+    <string name="sort_by">Sort by</string>
+    <string name="empty_game_list">Games list is empty</string>
+
+    <string name="search_game">Search game</string>
+    <string name="search">Search</string>
+    <string name="dropdown">Dropdown</string>
 </resources>

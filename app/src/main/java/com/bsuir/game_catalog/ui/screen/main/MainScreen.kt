@@ -3,7 +3,6 @@ package com.bsuir.game_catalog.ui.screen.main
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
@@ -13,6 +12,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.bsuir.game_catalog.ui.component.nav.BottomNavigationBar
+import com.bsuir.game_catalog.ui.screen.main.game_list.FavoriteGameListScreen
+import com.bsuir.game_catalog.ui.screen.main.game_list.FullGameListScreen
 import com.bsuir.game_catalog.utils.MainRoute
 import com.bsuir.game_catalog.viewmodel.AuthViewModel
 import com.bsuir.game_catalog.viewmodel.FavoriteViewModel
@@ -50,22 +51,18 @@ fun MainScreen(
                 )
             }
             composable(MainRoute.GAME_LIST) {
-                val games by gameViewModel.games.collectAsState()
-                val favorites by favoriteViewModel.favoriteGames.collectAsState()
-                GameListScreen(
-                    games = games,
-                    favorites = favorites,
+                FullGameListScreen(
+                    gameViewModel = gameViewModel,
+                    favoriteViewModel = favoriteViewModel,
                     onClickOnGame = { gameId: String ->
                         navController.navigate("${MainRoute.SelectedGame.ROUTE}/${gameId}")
                     }
                 )
             }
             composable(MainRoute.FAVORITES) {
-                val games by gameViewModel.games.collectAsState()
-                val favorites by favoriteViewModel.favoriteGames.collectAsState()
-                GameListScreen(
-                    games = games.filter { it.id in favorites },
-                    favorites = favorites,
+                FavoriteGameListScreen(
+                    gameViewModel = gameViewModel,
+                    favoriteViewModel = favoriteViewModel,
                     onClickOnGame = { gameId: String ->
                         navController.navigate("${MainRoute.SelectedGame.ROUTE}/${gameId}")
                     }
