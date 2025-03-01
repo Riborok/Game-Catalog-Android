@@ -52,14 +52,14 @@ class MainActivity : ComponentActivity() {
                             NavigateToMainIfAuthenticated(authViewModel, navController)
                             LoginScreen(
                                 authViewModel = authViewModel,
-                                navController = navController,
+                                onNavToRegister = { navController.navigate(AuthRoute.REGISTER) },
                             )
                         }
                         composable(AuthRoute.REGISTER) {
                             NavigateToMainIfAuthenticated(authViewModel, navController)
                             RegisterScreen(
                                 authViewModel = authViewModel,
-                                navController = navController,
+                                onNavToLogin = { navController.navigate(AuthRoute.LOGIN) },
                             )
                         }
                         composable(AuthRoute.MAIN) {
