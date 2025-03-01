@@ -71,8 +71,7 @@ fun MainScreen(
                     }
                 )
             }
-            composable(
-                "${MainRoute.SelectedGame.ROUTE}/{${MainRoute.SelectedGame.ID}}",
+            composable("${MainRoute.SelectedGame.ROUTE}/{${MainRoute.SelectedGame.ID}}",
                 arguments = listOf(
                     navArgument(MainRoute.SelectedGame.ID) { type = NavType.StringType }
                 )

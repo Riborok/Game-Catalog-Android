@@ -47,22 +47,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bsuir.game_catalog.model.Game
 import com.bsuir.game_catalog.ui.component.general.ClickableOutlinedTextField
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.bsuir.game_catalog.utils.parseDate
 
 enum class SortOption(val displayName: String) {
     TITLE("Title"),
     COMPANY("Company"),
     RELEASE_DATE("Release Date")
-}
-
-fun parseReleaseDate(dateStr: String): Date? {
-    return try {
-        SimpleDateFormat("MMMM dd, yyyy", Locale.ENGLISH).parse(dateStr)
-    } catch (e: Exception) {
-        null
-    }
 }
 
 @Composable
@@ -91,7 +81,7 @@ fun GameListScreen(
         SortOption.TITLE -> filteredGames.sortedBy { it.title.lowercase() }
         SortOption.COMPANY -> filteredGames.sortedBy { it.company.lowercase() }
         SortOption.RELEASE_DATE ->  {
-            filteredGames.sortedByDescending { parseReleaseDate(it.releaseDate)?.time ?: Long.MAX_VALUE }
+            filteredGames.sortedByDescending { parseDate(it.releaseDate)?.time ?: Long.MAX_VALUE }
         }
     }
 
