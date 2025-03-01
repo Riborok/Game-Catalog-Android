@@ -75,23 +75,14 @@ fun MainScreen(
                 "${MainRoute.GAME_DETAIL}/{gameId}",
                 arguments = listOf(navArgument("gameId") { type = NavType.StringType })
             ) { backStackEntry ->
-                val gameId = backStackEntry.arguments?.getString("gameId")
-                val games by gameViewModel.games.collectAsState()
-                val favorites by favoriteViewModel.favoriteGames.collectAsState()
-                val isFavorite = favorites.contains(gameId)
+                val gameId = backStackEntry.arguments?.getString("gameId")!!
                 GameScreen(
                     authViewModel = authViewModel,
+                    gameViewModel = gameViewModel,
+                    favoriteViewModel = favoriteViewModel,
                     reviewViewModel = reviewViewModel,
-                    game = games.find { it.id == gameId }!!,
-                    isFavorite = isFavorite,
+                    gameId = gameId,
                     onBackClick = { navController.popBackStack() },
-                    onFavoriteClick = {
-                        if (isFavorite) {
-                            favoriteViewModel.removeGameFromFavorites(gameId!!)
-                        } else {
-                            favoriteViewModel.addGameToFavorites(gameId!!)
-                        }
-                    }
                 )
             }
         }

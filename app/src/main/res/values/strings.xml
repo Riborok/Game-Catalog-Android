@@ -62,4 +62,16 @@
 
     <string name="review_create_failed">Failed to create review</string>
     <string name="reviews_load_failed">Failed to load reviews</string>
+
+    <string name="game_image">Game image</string>
+    <string name="back">Back</string>
+    <string name="company">Company</string>
+    <string name="release_date">Release date</string>
+    <string name="official_website">Official website</string>
+
+    <string name="comments">Comments</string>
+    <string name="no_comments">No comments yet</string>
+    <string name="add_comment">Add your comment</string>
+    <string name="rating">Rating (1–5)</string>
+    <string name="submit">Submit</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.bsuir.game_catalog.repository
 
 import com.bsuir.game_catalog.model.ReviewRequest
-import com.bsuir.game_catalog.model.ReviewResponse
+import com.bsuir.game_catalog.model.Review
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.utils.FireCollection
 import com.google.firebase.firestore.DocumentSnapshot
@@ -15,7 +15,7 @@ class ReviewRepository {
 
     fun createReview(
         request: ReviewRequest,
-        onResult: (Result<ReviewResponse>) -> Unit
+        onResult: (Result<Review>) -> Unit
     ) {
         addReviewToFirestore(request) { result ->
             result.onSuccess { document ->
@@ -57,8 +57,8 @@ class ReviewRepository {
     private fun buildReviewResponse(
         request: ReviewRequest,
         profile: UserProfile
-    ): ReviewResponse {
-        return ReviewResponse(
+    ): Review {
+        return Review(
             user = profile,
             gameId = request.gameId,
             rating = request.rating,
@@ -68,7 +68,7 @@ class ReviewRepository {
 
     fun getReviewsForGame(
         gameId: String,
-        onResult: (Result<List<ReviewResponse>>) -> Unit
+        onResult: (Result<List<Review>>) -> Unit
     ) {
         fetchReviews(gameId) { reviewResult ->
             reviewResult.onSuccess { reviewList ->
@@ -132,10 +132,10 @@ class ReviewRepository {
     private fun buildReviewResponses(
         reviewList: List<ReviewRequest>,
         profilesMap: Map<String, UserProfile>
-    ): List<ReviewResponse> {
+    ): List<Review> {
         return reviewList.map { review ->
             val profile = profilesMap[review.userId] ?: UserProfile()
-            ReviewResponse(
+            Review(
                 user = profile,
                 gameId = review.gameId,
                 rating = review.rating,

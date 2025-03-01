@@ -3,7 +3,7 @@ package com.bsuir.game_catalog.viewmodel
 import android.app.Application
 import com.bsuir.game_catalog.R
 import com.bsuir.game_catalog.model.ReviewRequest
-import com.bsuir.game_catalog.model.ReviewResponse
+import com.bsuir.game_catalog.model.Review
 import com.bsuir.game_catalog.repository.ReviewRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +12,7 @@ class ReviewViewModel(application: Application) : StatusHandlingViewModel(applic
 
     private val repository = ReviewRepository()
 
-    private val _reviews = MutableStateFlow<List<ReviewResponse>>(emptyList())
+    private val _reviews = MutableStateFlow<List<Review>>(emptyList())
     val reviews = _reviews.asStateFlow()
 
     fun createReview(request: ReviewRequest) {

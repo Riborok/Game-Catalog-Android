@@ -7,7 +7,7 @@ data class ReviewRequest(
     var text: String = ""
 )
 
-data class ReviewResponse(
+data class Review(
     var user: UserProfile = UserProfile(),
     var gameId: String = "",
     var rating: Int = 0,
