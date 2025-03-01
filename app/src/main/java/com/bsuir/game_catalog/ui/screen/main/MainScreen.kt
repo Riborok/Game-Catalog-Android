@@ -56,7 +56,7 @@ fun MainScreen(
                     games = games,
                     favorites = favorites,
                     onClickOnGame = { gameId: String ->
-                        navController.navigate("${MainRoute.GAME_DETAIL}/${gameId}")
+                        navController.navigate("${MainRoute.SelectedGame.ROUTE}/${gameId}")
                     }
                 )
             }
@@ -67,16 +67,18 @@ fun MainScreen(
                     games = games.filter { it.id in favorites },
                     favorites = favorites,
                     onClickOnGame = { gameId: String ->
-                        navController.navigate("${MainRoute.GAME_DETAIL}/${gameId}")
+                        navController.navigate("${MainRoute.SelectedGame.ROUTE}/${gameId}")
                     }
                 )
             }
             composable(
-                "${MainRoute.GAME_DETAIL}/{gameId}",
-                arguments = listOf(navArgument("gameId") { type = NavType.StringType })
+                "${MainRoute.SelectedGame.ROUTE}/{${MainRoute.SelectedGame.ID}}",
+                arguments = listOf(
+                    navArgument(MainRoute.SelectedGame.ID) { type = NavType.StringType }
+                )
             ) { backStackEntry ->
-                val gameId = backStackEntry.arguments?.getString("gameId")!!
-                GameScreen(
+                val gameId = backStackEntry.arguments?.getString(MainRoute.SelectedGame.ID)!!
+                SelectedGameScreen(
                     authViewModel = authViewModel,
                     gameViewModel = gameViewModel,
                     favoriteViewModel = favoriteViewModel,

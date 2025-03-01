@@ -20,7 +20,7 @@ import com.bsuir.game_catalog.viewmodel.GameViewModel
 import com.bsuir.game_catalog.viewmodel.ReviewViewModel
 
 @Composable
-fun GameScreen(
+fun SelectedGameScreen(
     authViewModel: AuthViewModel,
     gameViewModel: GameViewModel,
     favoriteViewModel: FavoriteViewModel,
