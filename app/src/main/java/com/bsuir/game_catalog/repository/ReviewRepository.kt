@@ -1,7 +1,7 @@
 package com.bsuir.game_catalog.repository
 
-import com.bsuir.game_catalog.model.ReviewRequest
 import com.bsuir.game_catalog.model.Review
+import com.bsuir.game_catalog.model.ReviewRequest
 import com.bsuir.game_catalog.model.UserProfile
 import com.bsuir.game_catalog.utils.FireCollection
 import com.google.firebase.firestore.DocumentSnapshot

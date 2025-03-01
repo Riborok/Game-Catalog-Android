@@ -2,8 +2,8 @@ package com.bsuir.game_catalog.viewmodel
 
 import android.app.Application
 import com.bsuir.game_catalog.R
-import com.bsuir.game_catalog.model.ReviewRequest
 import com.bsuir.game_catalog.model.Review
+import com.bsuir.game_catalog.model.ReviewRequest
 import com.bsuir.game_catalog.repository.ReviewRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

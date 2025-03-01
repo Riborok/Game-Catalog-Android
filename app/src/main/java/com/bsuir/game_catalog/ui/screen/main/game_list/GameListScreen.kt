@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import com.bsuir.game_catalog.model.Game
 import com.bsuir.game_catalog.ui.component.game.list.GameList
 import com.bsuir.game_catalog.ui.component.game.list.card.EmptyGameCard
-import com.bsuir.game_catalog.ui.component.game.list.form.SearchBar
 import com.bsuir.game_catalog.ui.component.game.list.form.FilterRow
+import com.bsuir.game_catalog.ui.component.game.list.form.SearchBar
 import com.bsuir.game_catalog.ui.component.game.list.utils.SortOption
 import com.bsuir.game_catalog.ui.component.game.list.utils.filterGames
 import com.bsuir.game_catalog.ui.component.game.list.utils.sortGames
